@@ -25,15 +25,21 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/prototype/login');
 
-Route::get('/admin', function () {
-    return 'hi admin';
-})->middleware('role:admin');
 
-Route::get('/user', function () {
-    return 'hi user';
-})->middleware('role:user');
+Route::prefix('prototype')->name('prototype.')->group(function () {
+    // route login
+    Route::get('/login', function () {
+        return Inertia::render('Prototypes/Login');
+    })->name("login");
+
+    // route register
+    Route::get('/register', function () {
+        return Inertia::render('Prototypes/Register');
+    })->name("register");
+});
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
